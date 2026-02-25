@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-guid: 638256484aa51dc4f814ca4e6c0e95fb
+guid: 5b83460f024014f479e7e70bbe5672e3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - entityData: {instanceID: 0}
-  - playerCollider: {instanceID: 0}
-  - slashAttack: {instanceID: 0}
+  - entityData: {fileID: 11400000, guid: 0225b32f57a09514b80ce65ecaa4883c, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
