@@ -9,5 +9,6 @@ public class EntityData : ScriptableObject
     public float speed;             // Movement speed of the entity
     public int defense;             // Defense points of the entity
     public int unitCost;            // value of the unit
+    public int maxDrops;          // upper bound of drops from entity
     public Vector3 currentPosition; // Current position of the entity in the game world
 }

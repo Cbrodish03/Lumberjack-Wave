@@ -1,6 +1,9 @@
 using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+// using System.Diagnostics;
+// using System.Diagnostics;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -15,7 +18,11 @@ public class EnemySpawner : MonoBehaviour
     public int MAX_ROUND = 5;
     private int round = 1;
 
+    [SerializeField]
     private List<GameObject> objectList;
+
+    [SerializeField]
+    GameObject enemyManager;
 
     void Start()
     {
@@ -23,6 +30,14 @@ public class EnemySpawner : MonoBehaviour
 
         // Start the round system properly
         StartCoroutine(RoundLoop());
+    }
+
+    void Update()
+    {
+            for(int i=0; i<enemyManager.gameObject.transform.childCount; i++)
+            {
+                enemyManager.gameObject.transform.GetChild(i).gameObject.GetComponent<Enemy>().scale(round);
+            }
     }
 
     private IEnumerator RoundLoop()
@@ -66,23 +81,21 @@ public class EnemySpawner : MonoBehaviour
     {
         while (remainingBucket > 0)
         {
-            GameObject prefab = objectList[Random.Range(0, objectList.Count)];
-
-            // Get the unit cost from the prefab's script
+            GameObject prefab = objectList[UnityEngine.Random.Range(0, objectList.Count)];
             Enemy enemyScript = prefab.GetComponent<Enemy>();
             int cost = enemyScript.data.unitCost;
-            Debug.Log("Unit Cost:  " + cost);
 
             // Spawn enemy
             Instantiate(
                 prefab,
-                new Vector3(Random.Range(-5f, 5f), Random.Range(-6f, 6f), 0),
-                Quaternion.identity
+                new Vector3(UnityEngine.Random.Range(-5f, 5f), UnityEngine.Random.Range(-6f, 6f), 0),
+                Quaternion.identity,
+                enemyManager.transform
             );
 
             remainingBucket -= cost;
-
             yield return new WaitForSeconds(spawnerCooldown);
         }
     }
+
 }

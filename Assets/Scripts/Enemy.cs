@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     public float speed;
     public int defense;
     public int unitCost;
+    public int maxDrops;
+    public bool scaled = false;
+
+    public double SCALE_FACTOR = 1.15;
 
     [SerializeField] public EntityData data;
 
@@ -28,9 +32,19 @@ public class Enemy : MonoBehaviour
         speed = data.speed;
         defense = data.defense;
         unitCost = data.unitCost;
+        maxDrops = data.maxDrops;
 
         startColor = GetComponent<SpriteRenderer>().color;  // starting color required for visual indicators
+    }
 
+    public void scale(int round) 
+    {
+        if (!scaled)
+        {
+            Debug.Log("did we actaully call scale");
+            health = (int) Math.Ceiling(health * Math.Pow(SCALE_FACTOR, round));
+            scaled = true;
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +82,7 @@ public class Enemy : MonoBehaviour
      private void Die()
     {
         // For now, just destroy the player object
+        player.GetComponent<Player>().AddDrops(this.maxDrops);
         Destroy(gameObject);
     }
 

@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     public int attackSpeed;
     public float speed;
     public int defense;
+    public int materials;
     private float nextAttackTime = 0f;
 
     private Color startColor;
@@ -146,10 +147,18 @@ public class Player : MonoBehaviour
                         if (enemy.health <= 0) 
                         {
                             heal(1);    // heal on death of enemy
+                            // deal with giving the player a resource on the death of the enemy
                         }
                     }
                 }
             }
+    }
+
+    public void AddDrops(int maxDrops)
+    {
+        System.Random r = new System.Random();
+        int dropsToAdd = r.Next((int)(maxDrops * 0.5), maxDrops);
+        this.materials += dropsToAdd;
     }
     
 }

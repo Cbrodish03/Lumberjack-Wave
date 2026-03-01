@@ -15,7 +15,8 @@ MonoBehaviour:
   health: 10
   damage: 1
   attackSpeed: 2
-  speed: 1.25
+  speed: 2
   defense: 0
   unitCost: 2
+  maxDrops: 3
   currentPosition: {x: 0, y: 0, z: 0}
